@@ -1,0 +1,24 @@
+Functionality:
+
+    ☐ Canvas:
+
+    Event handlers:
+        ☐ Mouse `left` click     -> `Place` Control points
+        ☐ `Enter`                -> `Start` the animation
+        ☐ `Escape`               -> `Quit` the window
+
+    Graphics:
+        ☐ Control points with a `small cicle around`
+        ☐ `Lines` between consecutive `points`
+        ☐ 7 Steps `animation`
+
+    Animation scenarios:
+        ☐ `no` control point     -> `Wait`
+        ☐ `1` control point      -> Cicle around
+        ☐ `2` control points     -> Line
+        ☐ `3+` control points    -> 7 steps 
+
+    Options:
+        ☐ `Alert` Message in no `control point scenario`
+        ☐ `Clear` canva without `restarting``
+        ☐ `Drag` control points in `real-time`
