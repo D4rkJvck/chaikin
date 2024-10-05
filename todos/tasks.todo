@@ -13,7 +13,7 @@ Functionality:
         ☐ 7 Steps `animation`
 
     Animation scenarios:
-        ☐ `no` control point     -> `Wait`
+        ☐ `no` control point     -> `Wait` for control point
         ☐ `1` control point      -> Cicle around
         ☐ `2` control points     -> Line
         ☐ `3+` control points    -> 7 steps 
