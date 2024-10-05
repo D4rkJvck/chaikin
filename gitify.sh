@@ -1,6 +1,6 @@
 #!/bin/bash
 
-desired_branch="master"
+desired_branch="main"
 username=""
 email=""
 
