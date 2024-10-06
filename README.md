@@ -39,7 +39,7 @@ To use SDL2 in a Rust project, you need to add the `sdl2` dependency to your `Ca
 
 ```toml
 [dependencies]
-sdl2 = "0.34"  # Check the latest version on crates.io
+sdl2 = "0.34"  # Check the latest version on crates.io or type cargo add sdl2 in the in the main repository
 ```
 
 Next, make sure you have installed the SDL2 libraries on your system. The installation instructions may vary depending on your operating system:
