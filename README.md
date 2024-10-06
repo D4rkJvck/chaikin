@@ -13,6 +13,8 @@
     - [Initialization](#initialization)
     - [Window](#window)
     - [Events](#events)
+    - [About](#about)
+- [Interface](#interface)
     - [Control Points](#control-points)
     - [Algorithm](#algorithm)
 - [Contributors](#contributors)
@@ -62,6 +64,8 @@ To use SDL2 in a Rust project, the `sdl2` dependency needs to be added to the `C
 sdl2 = "0.34" // Check for later verions
 ```
 
+###### [_Table of Contents ⤴️_](#table-of-contents)
+
 ## Usage
 
 ### Initialization
@@ -85,18 +89,24 @@ Some of those input events can be:
 - **`Event::Quit`**: Triggered when the user tries to close the window.
 - **`Event::KeyDown`**: Detects if a key is pressed, and here we specifically check if the **Escape** key was pressed to exit the loop.
 
-   - **`canvas.present()`**: Updates the display with the current rendering of the canvas.
-   - **`sleep()`**: Limits the number of frames per second to 60 using a delay.  
+On each iteration the canvas is cleared via the **`clear()`** method and the display is updated with the current rendering of the canvas via the **`present()`** method in a time interval that will be set with the **`std::thread::sleep()`** function that will limit the number of frames per second to 60 using a delay.
 
+### About
 
+SDL2 is a powerful and flexible library that simplifies the development of multimedia applications by providing low-level abstractions for display, audio, and input. By using Rust with SDL2, you can leverage Rust's memory safety and performance while developing games or interactive applications.
 
-To begin, run the program.
+For more in-depth information, refer to the [official SDL2 documentation](https://wiki.libsdl.org/) and [crates.io for sdl2](https://crates.io/crates/sdl2) for more examples and available features.
+
+###### [_Table of Contents ⤴️_](#table-of-contents)
+
+## Interface
+
+To open a new window, run the program.
 
 ```rust
 $ cargo run
 ```
 
-this will open a new centered window.  
 Next, **`left click`** anywhere on the inner window to place a **`control point`**.
 
 ### Control Points
@@ -114,7 +124,7 @@ The **`Chaikin`** algorithm is pretty simple in its definition as it's about add
 This process is repeated **`7 times`** applying the same rules and as a result the polyline transitions to a curved line.  
 After those **`7 steps`** transition, the process restarts with the initial polyline.
 
-Control Point are what 
+###### [_Table of Contents ⤴️_](#table-of-contents)
 
 ## Contributors
 
@@ -125,64 +135,3 @@ Control Point are what
 ## License
 
 [![MIT](https://shields.io/badge/License-MIT-yellow)](LICENSE)
-
-
-
-## SDL2-in-Rust
-
-```rust
-extern crate sdl2;
-
-use sdl2::pixels::Color;
-use sdl2::event::Event;
-use sdl2::keyboard::Keycode;
-use std::time::Duration;
-
-fn main() {
-    // Initialize SDL
-    let sdl_context = sdl2::init().unwrap();
-    let video_subsystem = sdl_context.video().unwrap();
-
-    // Create a window
-    let window = video_subsystem.window("rust-sdl2 demo", 800, 600)
-        .position_centered()
-        .build()
-        .unwrap();
-
-    // Create a canvas for rendering
-    let mut canvas = window.into_canvas().build().unwrap();
-
-    // Main application loop
-    let mut event_pump = sdl_context.event_pump().unwrap();
-    let mut i = 0;
-    'running: loop {
-        i = (i + 1) % 255;  // Update color
-        canvas.set_draw_color(Color::RGB(i, 64, 255 - i));
-        canvas.clear();
-
-        // Event handling
-        for event in event_pump.poll_iter() {
-            match event {
-                Event::Quit {..} |
-                Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
-                    break 'running;  // Exit the loop if the user closes the window or presses Escape
-                },
-                _ => {}
-            }
-        }
-
-        // Render the display
-        canvas.present();
-        ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 60));  // Limit to 60 FPS
-    }
-}
-```
-
-## Code Details
-
-
-## Conclusion
-
-SDL2 is a powerful and flexible library that simplifies the development of multimedia applications by providing low-level abstractions for display, audio, and input. By using Rust with SDL2, you can leverage Rust's memory safety and performance while developing games or interactive applications.
-
-For more in-depth information, refer to the [official SDL2 documentation](https://wiki.libsdl.org/) and [crates.io for sdl2](https://crates.io/crates/sdl2) for more examples and available features.
