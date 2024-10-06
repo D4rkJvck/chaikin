@@ -4,7 +4,7 @@ use sdl2::keyboard::Keycode;
 use std::time::Duration;
 
 pub fn main() {
-    // tuto sdl that providersome handling of sdl2 for more information check the markedown file
+    // tuto sdl that provider some handling of sdl2 for more information check the markedown file
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
 
