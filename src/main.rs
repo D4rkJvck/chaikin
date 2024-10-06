@@ -1,6 +1,6 @@
 use std::{thread, time::Duration};
 
-use drawing::Interface;
+use chaikin::Interface;
 
 pub fn main() {
     let mut window = Interface::new();

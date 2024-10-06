@@ -2,24 +2,10 @@ Functionality:
     
     ☐ Chaikin Algorithm
 
-    Canvas:
-        ✔ Interface @done(24-10-06 14:00)
-            <- Canvas
-            <- Event Pump
-            <- Points
-
-        ✔ Point @done(24-10-06 00:23)
-            <- Position X
-            <- Position Y
-            <- Control Point ?
-
-        ✔ Cicle @done(24-10-06 14:08)
-            <- Center
-
-        ✔ Line @done(24-10-06 00:23)
-            <- Point A
-            <- Point B
-
+   ✔ Interface @done(24-10-06 14:00)
+        <- Canvas
+        <- Event Pump
+        <- Points
 
     Event Handlers:
         ☐ Mouse `left` click     -> `Place` Control points

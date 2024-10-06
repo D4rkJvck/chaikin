@@ -1,5 +1,7 @@
-use crate::drawing::*;
-use sdl2::{event::Event, keyboard::Keycode, pixels::Color, render::Canvas, video::Window};
+use sdl2::{
+    event::Event, keyboard::Keycode, mouse::MouseButton, pixels::Color, rect::Point,
+    render::Canvas, video::Window,
+};
 
 const TITLE: &str = "CHAIKIN";
 const WIDTH: u32 = 800;
@@ -56,22 +58,20 @@ impl Interface {
                     keycode: Some(Keycode::Escape),
                     ..
                 } => return false,
+                Event::MouseButtonDown {
+                    mouse_btn: MouseButton::Left,
+                    x,
+                    y,
+                    ..
+                } => {
+                    self.canvas.set_draw_color(Color::WHITE);
+                    self.canvas.draw_point(Point::new(x, y)).unwrap();
+                    println!("Point: {}, {}", x, y);
+                }
                 _ => {}
             }
         }
 
         true
-    }
-
-    pub fn get_points(&self) -> &Vec<Point> {
-        &self.points
-    }
-
-    pub fn place_ctrl_point(&mut self, point: Point) {
-        self.points.push(point);
-    }
-
-    pub fn draw_new_point(&mut self, point: Point, position: usize) {
-        self.points.insert(position, point);
     }
 }
