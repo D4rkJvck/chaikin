@@ -7,7 +7,7 @@
 - [Usage](#usage)
 - [Contributors](#contributors)
 - [License](#license)
-- [License](#SDL2_Documentation_in_Rust)
+- [SDL2-Documentation-in-Rust](#sdl2-documentation-in-rust)
 
 
 
@@ -27,7 +27,7 @@
 
 
 
-# SDL2 Documentation in Rust
+## SDL2-Documentation-in-Rust
 
 ## What is SDL2?
 
