@@ -1,18 +1,41 @@
 Functionality:
+    
+    ☐ Chaikin Algorithm
 
-    ☐ Canvas:
+    Canvas:
+        ☐ Window
+            <- Width
+            <- Height
+            <- Event handler
+            <- Points
 
-    Event handlers:
+        ☐ Event
+            -> Click
+            -> Enter
+            -> Escape
+
+        ✔ Point @done(24-10-06 00:23)
+            <- Position X
+            <- Position Y
+            <- Control Point ?
+
+        ✔ Line @done(24-10-06 00:23)
+            <- Point A
+            <- Point B
+
+
+    Event Handlers:
         ☐ Mouse `left` click     -> `Place` Control points
         ☐ `Enter`                -> `Start` the animation
         ☐ `Escape`               -> `Quit` the window
 
     Graphics:
+        ☐ Window centered one the screen
         ☐ Control points with a `small cicle around`
         ☐ `Lines` between consecutive `points`
         ☐ 7 Steps `animation`
 
-    Animation scenarios:
+    Animation Scenarios:
         ☐ `no` control point     -> `Wait` for control point
         ☐ `1` control point      -> Cicle around
         ☐ `2` control points     -> Line
