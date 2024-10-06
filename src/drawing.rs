@@ -6,7 +6,6 @@ pub struct Point {
     ctrl: bool,
 }
 
-#[allow(unused)]
 impl Point {
     pub fn new(x: i32, y: i32, ctrl: bool) -> Self {
         Point { x, y, ctrl }
@@ -33,7 +32,6 @@ pub struct Line {
     b: Point,
 }
 
-#[allow(unused)]
 impl Line {
     pub fn new(a: Point, b: Point) -> Self {
         Line { a, b }
@@ -53,19 +51,14 @@ impl Line {
 
 pub struct Circle {
     center: Point,
-    radius: i32,
 }
 
 impl Circle {
-    pub fn new(center: Point, radius: i32) -> Self {
-        Circle { center, radius }
+    pub fn new(center: Point) -> Self {
+        Circle { center }
     }
 
     pub fn get_center(&self) -> &Point {
         &self.center
-    }
-
-    pub fn get_radius(&self) -> i32 {
-        self.radius
     }
 }

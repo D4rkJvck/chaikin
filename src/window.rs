@@ -5,7 +5,6 @@ const TITLE: &str = "CHAIKIN";
 const WIDTH: u32 = 800;
 const HEIGHT: u32 = 600;
 pub struct Interface {
-    context: sdl2::Sdl,
     canvas: Canvas<Window>,
     event_pump: sdl2::EventPump,
     points: Vec<Point>,
@@ -14,11 +13,11 @@ pub struct Interface {
 impl Interface {
     pub fn new() -> Self {
         // Initialize the SDL
-        let context = sdl2::init().unwrap();
-        let video = context.video().unwrap();
+        let sdl_context = sdl2::init().unwrap();
+        let video_subsystem = sdl_context.video().unwrap();
 
         // Create a window
-        let window = video
+        let window = video_subsystem
             .window(TITLE, WIDTH, HEIGHT)
             .fullscreen()
             .build()
@@ -28,13 +27,12 @@ impl Interface {
         let canvas = window.into_canvas().build().unwrap();
 
         // Initialize an event pump from the context
-        let event_pump = context.event_pump().unwrap();
+        let event_pump = sdl_context.event_pump().unwrap();
 
         // Initialize
         let points: Vec<Point> = Vec::new();
 
         Interface {
-            context,
             canvas,
             event_pump,
             points,

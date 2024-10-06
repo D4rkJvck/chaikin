@@ -3,21 +3,18 @@ Functionality:
     ☐ Chaikin Algorithm
 
     Canvas:
-        ☐ Window
-            <- Width
-            <- Height
-            <- Event handler
+        ✔ Interface @done(24-10-06 14:00)
+            <- Canvas
+            <- Event Pump
             <- Points
-
-        ☐ Event
-            -> Click
-            -> Enter
-            -> Escape
 
         ✔ Point @done(24-10-06 00:23)
             <- Position X
             <- Position Y
             <- Control Point ?
+
+        ✔ Cicle @done(24-10-06 14:08)
+            <- Center
 
         ✔ Line @done(24-10-06 00:23)
             <- Point A
@@ -27,10 +24,10 @@ Functionality:
     Event Handlers:
         ☐ Mouse `left` click     -> `Place` Control points
         ☐ `Enter`                -> `Start` the animation
-        ☐ `Escape`               -> `Quit` the window
+        ✔ `Escape`               -> `Quit` the window @done(24-10-06 13:59)
 
     Graphics:
-        ☐ Window centered one the screen
+        ✔ Window fullscreen @done(24-10-06 14:00)
         ☐ Control points with a `small cicle around`
         ☐ `Lines` between consecutive `points`
         ☐ 7 Steps `animation`
