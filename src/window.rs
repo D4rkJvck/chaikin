@@ -1,8 +1,8 @@
-
-use std::{thread, process, time::Duration};
+use std::{thread, time::Duration};
 
 use sdl2::{
-    event::Event, keyboard::Keycode, pixels::Color, rect::Point, render::Canvas, video::Window,
+    event::Event, keyboard::Keycode, mouse::MouseButton, pixels::Color, rect::Point,
+    render::Canvas, video::Window,
 };
 
 use crate::Circle;
@@ -10,6 +10,11 @@ use crate::Circle;
 const TITLE: &str = "CHAIKIN";
 const WIDTH: u32 = 1024;
 const HEIGHT: u32 = 720;
+
+/// The Interface between the user
+/// and the program.
+/// Holds all the necessary tools
+/// to interact with the user.
 pub struct Interface {
     pub canvas: Canvas<Window>,
     pub event_pump: sdl2::EventPump,
@@ -17,32 +22,34 @@ pub struct Interface {
 }
 
 impl Interface {
-    /// This method holds all the logic around the SDL implementation.
-    /// It initializes the context that will be then used to create
-    /// a new window given a title and dimensions.
-    /// Afterwards it turns the window to a canvas.
-    /// It also initializes a event pump to get the user input events.
-    /// It finally initializes the instance of the window.
+    /// This method holds all the logic around the `SDL` implementation.
+    /// It initializes the "context" that will be then used to create
+    /// a new "window" given a `title` and `dimensions`.
+    /// Afterwards it turns the window to a "canvas".
+    /// It also initializes a "event pump" from the context
+    /// to get the `user` input `events`.
+    /// It finally initializes the instance of the `interface``.
     pub fn new() -> Self {
         // Initialize the SDL
         let sdl_context = sdl2::init().unwrap();
         let video_subsystem = sdl_context.video().unwrap();
 
-        // Create a window
-        let window = video_subsystem
+        let window = video_subsystem // Create a window
             .window(TITLE, WIDTH, HEIGHT)
             .position_centered()
             .build()
             .unwrap();
 
-        // Create a canvas from the window
-        let canvas = window.into_canvas().build().unwrap();
+        let canvas = window         // Create a canvas from the window
+            .into_canvas()
+            .build()
+            .unwrap();
 
-        // Initialize an event pump from the context
-        let event_pump = sdl_context.event_pump().unwrap();
+        let event_pump = sdl_context        // Initialize an event pump from the context
+            .event_pump()
+            .unwrap();
 
-        // Initialize
-        let points: Vec<Point> = Vec::new();
+        let points: Vec<Point> = Vec::new();                // Initialize
 
         Interface {
             canvas,
@@ -51,10 +58,57 @@ impl Interface {
         }
     }
 
+    /// This method is responsible for anything related to the `events`.
+    /// It play a crucial role regarding the interaction between the
+    /// user and the program. It is also the unique conveyor of 
+    /// the main function for the user's desire to `exit` the program.
+    pub fn running(&mut self) -> Result<(), String> {
+        let events: Vec<Event> = self.event_pump.poll_iter().collect();
+
+        for event in events {
+            match event {
+                // Quit the application wether by
+                // clicking on the window's `X` button
+                Event::Quit { .. }
+                // or by pressing the [ Escape ] key
+                | Event::KeyDown {
+                    keycode: Some(Keycode::ESCAPE),
+                    ..
+                } => return Err("Exiting...".to_string()),
+
+                // Mark control points on the canvas
+                // by clicking on the `Left` mouse button.
+                Event::MouseButtonDown {
+                    mouse_btn: MouseButton::Left,
+                    x,
+                    y,
+                    ..
+                } => self.add_point(x, y)?,
+
+                // Start the curve transition by
+                // pressing the [ Enter ] key.
+                Event::KeyDown {
+                    keycode: Some(Keycode::RETURN),
+                    ..
+                } => self.animate()?,
+
+                // Intended to clear the window
+                // so the user can mark new control points.
+                Event::KeyDown {
+                    keycode: Some(Keycode::SPACE),
+                    ..
+                } => self.clear(),
+
+                _ => {}
+            };
+        }
+
+        Ok(())
+    }
+
     /// A shortcut for not only avoid repetition of process
-    /// but also secure the direct access to the the structure's
-    /// fields.
-    pub fn clear(&mut self) {
+    /// but also secure the direct access to the structure's fields.
+    fn clear(&mut self) {
         self.canvas.set_draw_color(Color::RGBA(0, 0, 0, 255));
         self.canvas.clear();
     }
@@ -63,7 +117,7 @@ impl Interface {
     /// to the points that have been marked by the user.
     /// Add each point in the application's points
     /// to have them stored somewhere for later rerendering.
-    pub fn add_point(&mut self, x: i32, y: i32) -> Result<(), String> {
+    fn add_point(&mut self, x: i32, y: i32) -> Result<(), String> {
         let point = Point::new(x, y);
         self.points.push(point);
         self.display(None)?;
@@ -71,9 +125,11 @@ impl Interface {
         Ok(())
     }
 
-    /// Responsible for the stored control points' display at  each iteration.
+    /// Responsible for all the display and rendering of the appliction.
+    /// from the control points to their marker, through the lines between
+    /// the points generated by the Chaikin algorithm.
     fn display(&mut self, polyline: Option<&Vec<Point>>) -> Result<(), String> {
-        // Set the colot and draw the control points.
+        // Set the color and draw the control points.
         self.canvas.set_draw_color(Color::RGBA(255, 255, 255, 255));
         self.canvas.draw_points(self.points.as_slice())?;
 
@@ -97,7 +153,11 @@ impl Interface {
 
     /// This method might be the most important, when it comes to
     /// the main objective of this application.
-    pub fn animate(&mut self) -> Result<(), String> {
+    /// It runs the animation that update the polyline transformation
+    /// to a curved line within 7 steps of rerendering.
+    /// It also allow the input events handling to keep going by
+    /// calling the running method within the animation loop.
+    fn animate(&mut self) -> Result<(), String> {
         let mut polyline: Vec<Point> = self.points.clone();
 
         match polyline.len() {
@@ -110,16 +170,7 @@ impl Interface {
                     self.clear();
                     self.display(Some(&polyline))?;
 
-                    let events: Vec<Event> = self.event_pump.poll_iter().collect();
-                    for event in events {
-                        if let Event::KeyDown {
-                            keycode: Some(Keycode::Escape),
-                            ..
-                        } = event
-                        {
-                            process::exit(0)
-                        }
-                    }
+                    self.running()?;
 
                     let mut temp = vec![polyline[0]];
 
