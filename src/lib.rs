@@ -1,6 +1,6 @@
 pub mod window;
 
-use sdl2::{rect::Point, render::Canvas, video::Window};
+use sdl2::{pixels::Color, rect::Point, render::Canvas, video::Window};
 pub use window::*;
 
 const RADIUS: i32 = 4;
@@ -26,6 +26,8 @@ impl Circle {
         let mut x = RADIUS;
         let mut y = 0;
         let mut decision_over_2 = 1 - x;
+
+        drawer.set_draw_color(Color::RGBA(0, 171, 129, 255));
 
         // Draw each octant's points.
         while y <= x {

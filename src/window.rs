@@ -132,22 +132,24 @@ impl Interface {
         // Set the color and draw the control points.
         self.canvas.set_draw_color(Color::RGBA(255, 255, 255, 255));
         self.canvas.draw_points(self.points.as_slice())?;
-
+        
         // Draw the control point's marker (circle).
         self.points.iter().for_each(|p| {
             let circle = Circle::new(*p);
             circle.draw(&mut self.canvas);
         });
-
+        
         // Draw lines from the first point of the given vector.
+        self.canvas.set_draw_color(Color::RGBA(246, 153, 255, 255));
+        
         if let Some(p) = polyline {
             for i in 0..p.len() - 1 {
                 self.canvas.draw_line(p[i], p[i + 1])?;
             }
         }
-
+        
+        self.canvas.set_draw_color(Color::RGBA(255, 255, 255, 255));
         self.canvas.present();
-
         Ok(())
     }
 
