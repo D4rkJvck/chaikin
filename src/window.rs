@@ -8,7 +8,7 @@ use sdl2::{
 use crate::Circle;
 
 const TITLE: &str = "CHAIKIN";
-const WIDTH: u32 = 1200;
+const WIDTH: u32 = 1280;
 const HEIGHT: u32 = 720;
 
 /// The Interface between the user
