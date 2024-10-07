@@ -36,7 +36,7 @@ impl Interface {
 
         let window = video_subsystem // Create a window
             .window(TITLE, WIDTH, HEIGHT)
-            .fullscreen()
+            .position_centered()
             .build()
             .unwrap();
 
@@ -188,7 +188,7 @@ impl Interface {
                     polyline = temp;                                // then debuff the final content to the initial polyline.
 
                     steps -= 1;
-                    thread::sleep(Duration::from_millis(5000)); // Slow down the animation to have a better look at the transitions
+                    thread::sleep(Duration::from_millis(500)); // Slow down the animation to have a better look at the transitions
                 }
 
                 self.animate()?;
