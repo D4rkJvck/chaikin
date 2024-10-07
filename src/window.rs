@@ -8,7 +8,7 @@ use sdl2::{
 use crate::Circle;
 
 const TITLE: &str = "CHAIKIN";
-const WIDTH: u32 = 1024;
+const WIDTH: u32 = 1200;
 const HEIGHT: u32 = 720;
 
 /// The Interface between the user
@@ -36,7 +36,7 @@ impl Interface {
 
         let window = video_subsystem // Create a window
             .window(TITLE, WIDTH, HEIGHT)
-            .position_centered()
+            .fullscreen()
             .build()
             .unwrap();
 
@@ -158,7 +158,7 @@ impl Interface {
     /// It also allow the input events handling to keep going by
     /// calling the running method within the animation loop.
     fn animate(&mut self) -> Result<(), String> {
-        let mut polyline: Vec<Point> = self.points.clone();
+        let mut polyline: Vec<Point> = self.points.clone();         // Copy the Interface's store as starting state
 
         match polyline.len() {
             0 | 1 => {}
@@ -170,9 +170,9 @@ impl Interface {
                     self.clear();
                     self.display(Some(&polyline))?;
 
-                    self.running()?;
+                    self.running()?;                                // Keep handling inputs events
 
-                    let mut temp = vec![polyline[0]];
+                    let mut temp = vec![polyline[0]];   // Store the first control point to a temporary buffer
 
                     for i in 0..polyline.len() - 1 {
                         let p0 = polyline[i];
@@ -181,14 +181,14 @@ impl Interface {
                         let q = Point::new((p0.x * 3 + p1.x) / 4, (p0.y * 3 + p1.y) / 4);
                         let r = Point::new((p0.x + p1.x * 3) / 4, (p0.y + p1.y * 3) / 4);
 
-                        temp.extend_from_slice(&[q, r]);
+                        temp.extend_from_slice(&[q, r]);            // Collect the generated point's pair.
                     }
 
-                    temp.push(*polyline.last().unwrap());
-                    polyline = temp;
+                    temp.push(*polyline.last().unwrap());           // Add the last point of the store
+                    polyline = temp;                                // then debuff the final content to the initial polyline.
 
                     steps -= 1;
-                    thread::sleep(Duration::from_millis(500));
+                    thread::sleep(Duration::from_millis(5000)); // Slow down the animation to have a better look at the transitions
                 }
 
                 self.animate()?;

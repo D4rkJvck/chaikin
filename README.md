@@ -111,17 +111,36 @@ Next, **`left click`** anywhere on the inner window to place a **`control point`
 
 ### Control Points
 
-Control points are selected pixels of the canvas surrounded by a **small cicle**. They are consecutively joined together with a **line** in order to form a polyline that will be then progressively curved through a **`7 steps`** loop usinf the **`Chaikin`** Algorithm.
+Control points are selected pixels of the canvas surrounded by a **small cicle**. They will be consecutively joined together with a **line** in order to form a polyline.  
+The polyline will be then progressively curved through a **`7 steps`** loop usinf the **`Chaikin`** Algorithm.
+  ![step_0](./src/assets/img/step_0.png)
 
 ### Algorithm
 
 The **`Chaikin`** algorithm is pretty simple in its definition as it's about adding **`new control points`** between the previous ones at a ratio of **`25%`** and **`75%`** of each segment (line) 's size:  
 
 ```rust
-    
+for i in 0..polyline.len() - 1 {
+  let p0 = polyline[i];
+  let p1 = polyline[i + 1];
+
+  let q = Point::new((p0.x * 3 + p1.x) / 4, (p0.y * 3 + p1.y) / 4);
+  let r = Point::new((p0.x + p1.x * 3) / 4, (p0.y + p1.y * 3) / 4);
+
+  temp.extend_from_slice(&[q, r]);            // Collect the generated point's pair.
+}    
 ```
 
 This process is repeated **`7 times`** applying the same rules and as a result the polyline transitions to a curved line.  
+
+![step_1](./src/assets/img/step_1.png)
+![step_2](./src/assets/img/step_2.png)
+![step_3](./src/assets/img/step_3.png)
+![step_4](./src/assets/img/step_4.png)
+![step_5](./src/assets/img/step_5.png)
+![step_6](./src/assets/img/step_6.png)
+![step_7](./src/assets/img/step_7.png)
+
 After those **`7 steps`** transition, the process restarts with the initial polyline.
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
