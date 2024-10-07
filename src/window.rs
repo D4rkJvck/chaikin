@@ -92,13 +92,6 @@ impl Interface {
                     ..
                 } => self.animate()?,
 
-                // Intended to clear the window
-                // so the user can mark new control points.
-                Event::KeyDown {
-                    keycode: Some(Keycode::SPACE),
-                    ..
-                } => self.clear(),
-
                 _ => {}
             };
         }
