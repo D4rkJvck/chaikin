@@ -1,33 +1,33 @@
 Functional:
 
     Run the program using `cargo run`.
-        ☐ Does it compile and run `without warnings`?
+        ✔ Does it compile and run `without warnings`? @done(24-10-06 23:00)
 
     Left click on the `canvas` to set one or more `control points`.
-        ☐ Does the program `allow` you to `mark` these control points?
-        ☐ Can you confirm that the program `draws` a `small circle` around the control points in order to `identify` them?
+        ✔ Does the program `allow` you to `mark` these control points? @done(24-10-06 23:00)
+        ✔ Can you confirm that the program `draws` a `small circle` around the control points in order to `identify` them? @done(24-10-06 23:00)
 
     Left click on the canvas to set three or more control points and press `Enter`.
-        ☐ Does the `animation` of the Chaikin's algorithm start?
+        ✔ Does the `animation` of the Chaikin's algorithm start? @done(24-10-07 00:19)
 
     Press `Escape` to exit the program.
-        ☐ Does the program exit `without errors`?
+        ✔ Does the program exit `without errors`? @done(24-10-06 23:00)
 
     Start the program and `left click` on the canvas to set just one control point and press `Enter`.
-        ☐ Can you confirm that `only` the control point is shown and `nothing` changes?
+        ✔ Can you confirm that `only` the control point is shown and `nothing` changes? @done(24-10-06 23:01)
 
     Restart the program and left click on the canvas to set just two control points and press `Enter`.
-        ☐ Can you confirm that only a `straight line` was drawn?
+        ✔ Can you confirm that only a `straight line` was drawn? @done(24-10-06 23:01)
 
     Restart the program and left click on the canvas to set three or more control points and press `Enter`.
-        ☐ Does the animation complete `7 steps` before `restarting`?
+        ✔ Does the animation complete `7 steps` before `restarting`? @done(24-10-07 00:19)
 
     Restart the program and `left click` on the canvas to set `three or more` control points and press `Enter`. Then press `Escape` to exit the program.
-        ☐ Does the program `exit` without errors?
+        ✔ Does the program `exit` without errors? @done(24-10-07 00:19)
 
     Start the program and press `Enter` without selecting any points.
-        ☐ Does the program `continue` without errors?
-        ☐ After you pressed `Enter` before selecting points, is it possible to `place` points without needing to `kill` the program?
+        ✔ Does the program `continue` without errors? @done(24-10-06 23:02)
+        ✔ After you pressed `Enter` before selecting points, is it possible to `place` points without needing to `kill` the program? @done(24-10-06 23:03)
 
         
 Bonus:

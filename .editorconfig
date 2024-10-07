@@ -8,5 +8,5 @@ charset = utf-8
 
 [*.rs]
 # break-before-parens = always
-# break-after-opening-brace = always
-break-after-parens = always
+break-after-opening-brace = never
+break-after-parens = "always"

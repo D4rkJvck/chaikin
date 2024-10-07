@@ -1,28 +1,31 @@
 Functionality:
     
-    ☐ Chaikin Algorithm
+    ✔ Chaikin Algorithm @done(24-10-06 23:05)
 
    ✔ Interface @done(24-10-06 14:00)
         <- Canvas
         <- Event Pump
         <- Points
+    ✔ Circle @done(24-10-06 23:05)
+        <- Center
+        o- Draw
 
     Event Handlers:
-        ☐ Mouse `left` click     -> `Place` Control points
-        ☐ `Enter`                -> `Start` the animation
+        ✔ Mouse `left` click     -> `Place` Control points @done(24-10-06 23:05)
+        ✔ `Enter`                -> `Start` the animation @done(24-10-06 23:05)
         ✔ `Escape`               -> `Quit` the window @done(24-10-06 13:59)
 
     Graphics:
         ✔ Window fullscreen @done(24-10-06 14:00)
-        ☐ Control points with a `small cicle around`
-        ☐ `Lines` between consecutive `points`
-        ☐ 7 Steps `animation`
+        ✔ Control points with a `small cicle around` @done(24-10-06 23:05)
+        ✔ `Lines` between consecutive `points` @done(24-10-06 23:05)
+        ✔ 7 Steps `animation` @done(24-10-07 00:19)
 
     Animation Scenarios:
-        ☐ `no` control point     -> `Wait` for control point
-        ☐ `1` control point      -> Cicle around
-        ☐ `2` control points     -> Line
-        ☐ `3+` control points    -> 7 steps 
+        ✔ `no` control point     -> `Wait` for control point @done(24-10-06 23:06)
+        ✔ `1` control point      -> Cicle around @done(24-10-06 23:06)
+        ✔ `2` control points     -> Line @done(24-10-06 23:06)
+        ✔ `3+` control points    -> 7 steps @done(24-10-06 23:06)
 
     Options:
         ☐ `Alert` Message in no `control point scenario`
